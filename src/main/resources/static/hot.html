@@ -1,0 +1,42 @@
+<div id="hot">
+    <div class="container">
+        <h3 class="w3ls-title">热卖商品</h3>
+        <div class="add-products-row" v-for="product in hotList">
+            <div class=" w3ls-add-grids">
+                <a href="javascript: void(0);" @click="toDetail(product)">
+                    <img :src="product.pic">
+                    <p>{{product.productName}}<span>{{product.price}}</span></p>
+                    <span>Shop now <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#hot",
+        data() {
+            return {
+                hotList: {}
+            }
+        },
+        methods: {
+            findHot: function () {
+                axios({
+                    url: `product/findHot`,
+                }).then(response => {
+                    this.hotList = response.data.data;
+                }).catch(error => {
+                    layer.msg(error.message)
+                })
+            },
+            toDetail: function (product) {
+                sessionStorage.setItem("product", JSON.stringify(product))
+                location.href = "goodsDetail.html";
+            }
+        },
+        created: function () {
+            this.findHot();
+        }
+    })
+</script>

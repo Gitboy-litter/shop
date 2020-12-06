@@ -1,0 +1,23 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://8.129.239.183:3306/xbshop?characterEncoding=utf8&useUnicode=true&serverTimezone=UTC
+    username: root
+    password: root
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true    # \u683C\u5F0F\u5316sql
+        show_sql: true        # \u663E\u793Asql
+  data:
+    mongodb:
+      database: mymongodb
+      host: 127.0.0.1
+      port: 27017
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.chen.xb.entity
+  configuration:
+    map-underscore-to-camel-case: true
